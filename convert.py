@@ -11,15 +11,16 @@ import os
 
 
 months = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"]
+year = "2020" # change this to your year
 
 for month in months:
 
-	tabula.convert_into("Months/"+month+"2020.pdf", month+"2020.tmp", output_format="csv", pages='all')
+	tabula.convert_into("Months/"+month+year+".pdf", month+year+".tmp", output_format="csv", pages='all')
 
 
 for month in months:
 
-	with open(month+"2020.tmp", newline='') as csvfile:
+	with open(month+year+".tmp", newline='') as csvfile:
 	
 		theReader = csv.reader(csvfile, delimiter=',', quotechar='"')
 		theReaderList = []
@@ -62,7 +63,7 @@ for month in months:
 			if "Ending " in aRow[0]:
 				theReaderList.remove(aRow)
 				
-		with open(month+"2020.csv", 'w') as f:
+		with open(month+year+".csv", 'w') as f:
 		
 			write = csv.writer(f)
 			fields = ['Date','Description','Amount']
@@ -70,7 +71,7 @@ for month in months:
 			write.writerows(theReaderList)
 			
 for month in months:
-	os.remove(month+"2020.tmp")
+	os.remove(month+year+".tmp")
 			
 				
 		
